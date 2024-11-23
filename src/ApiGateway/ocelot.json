@@ -1,0 +1,41 @@
+{
+  //---Location Service: Start ----------//
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Countries/GetAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+
+      // Configure caching
+      // the cache will expire after 30 seconds.
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "countriescaching"
+      },
+
+      "UpstreamPathTemplate": "/Countries/GetAll",
+      "UpstreamHttpMethod": [ "Get" ],
+
+      // Enable case sensative Routing/URL
+      "RouteIsCaseSensitive": true
+    }
+
+    //---Location Service: End ----------//  
+
+  ],
+
+  //---Ordering Service: End ----------//
+
+  //https://localhost:7282/api/Products/GetAll
+
+  "GlobalConfiguration": {
+    // enable request correleation id to capture request information
+    "RequestIdKey": "X-Correlation-Id",
+    "BaseUrl": "https://localhost:7205/"
+  }
+}
